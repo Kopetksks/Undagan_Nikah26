@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-700.css";
+@import "@fontsource/cormorant-garamond/latin-500-italic.css";
+@import "@fontsource/cormorant-garamond/latin-600-italic.css";
+@import "@fontsource/cormorant-garamond/latin-700-italic.css";
+@import "@fontsource/amiri/arabic-400.css";
+@import "@fontsource/amiri/arabic-700.css";
+
+@theme {
+  --color-ink: #1c1712;
+  --color-paper: #f4efe4;
+  --color-forest: #12312b;
+  --color-gold: #a68445;
+  --font-sans: "Cormorant Garamond", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  --font-arabic: "Amiri", "Times New Roman", serif;
+  --tracking-crest: 0.28em;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: var(--color-forest);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    font-weight: 500;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-gold) 50%, white);
+    color: var(--color-ink);
+  }
+}
+
+.sheet {
+  background-color: var(--color-paper);
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, white 40%, var(--color-paper)),
+    var(--color-paper) 12rem
+  );
+  box-shadow: 0 28px 70px color-mix(in oklab, black 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .sheet {
+    box-shadow: none !important;
+    break-after: page;
+  }
+
+  .sheet:last-child {
+    break-after: auto;
+  }
+}
