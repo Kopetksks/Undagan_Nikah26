@@ -16,6 +16,8 @@ export const Route = createRootRoute({
         content: "Surat undangan Praktik Nikah, Kamis 5 November 2026.",
       },
       { name: "theme-color", content: "#12312b" },
+      { property: "og:image", content: "https://undagannikah.vercel.app/preview.jpg" },
+      { name: "twitter:image", content: "https://undagannikah.vercel.app/preview.jpg" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
