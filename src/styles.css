@@ -9,10 +9,13 @@
 @import "@fontsource/amiri/arabic-700.css";
 
 @theme {
-  --color-ink: #1c1712;
-  --color-paper: #f4efe4;
-  --color-forest: #12312b;
-  --color-gold: #a68445;
+  --color-ink: #0e1a33;
+  --color-paper: #f4f8fd;
+  --color-navy: #0a2150;
+  --color-deep: #06142f;
+  --color-royal: #1d4ea8;
+  --color-sky: #8fb8f5;
+  --color-gold: #b08d3c;
   --font-sans: "Cormorant Garamond", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
   --font-arabic: "Amiri", "Times New Roman", serif;
   --tracking-crest: 0.28em;
@@ -25,7 +28,9 @@
   }
 
   body {
-    background: var(--color-forest);
+    background-color: var(--color-navy);
+    background-image: radial-gradient(120% 55% at 50% 0%, #1b4a9a 0%, transparent 70%);
+    background-repeat: no-repeat;
     color: var(--color-paper);
     font-family: var(--font-sans);
     font-weight: 500;
@@ -37,8 +42,13 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-gold) 50%, white);
+    background: color-mix(in oklab, var(--color-sky) 55%, white);
     color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sky);
+    outline-offset: 3px;
   }
 }
 
@@ -46,14 +56,136 @@
   background-color: var(--color-paper);
   background-image: linear-gradient(
     180deg,
-    color-mix(in oklab, white 40%, var(--color-paper)),
+    color-mix(in oklab, white 55%, var(--color-paper)),
     var(--color-paper) 12rem
   );
-  box-shadow: 0 28px 70px color-mix(in oklab, black 35%, transparent);
+  box-shadow: 0 28px 70px color-mix(in oklab, black 40%, transparent);
+}
+
+/* ---------- Sampul pembuka (satu momen animasi utama) ---------- */
+
+.sampul {
+  background-color: var(--color-deep);
+  background-image:
+    radial-gradient(70% 45% at 50% 38%, #1d4ea8 0%, transparent 72%),
+    linear-gradient(180deg, var(--color-navy) 0%, var(--color-deep) 100%);
+}
+
+@keyframes logo-muncul {
+  0% {
+    opacity: 0;
+    transform: translateY(2.5rem) scale(0.55) rotate(-14deg);
+    filter: blur(6px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-0.3rem) scale(1.04) rotate(2deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes logo-apung {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.45rem);
+  }
+}
+
+@keyframes riak {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  20% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+
+@keyframes putar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes naik {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes gelombang {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-1200px);
+  }
+}
+
+@keyframes kilau {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-sky) 55%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 0.6rem transparent;
+  }
+}
+
+.anim-logo {
+  animation: logo-muncul 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+
+.anim-apung {
+  animation: logo-apung 5s ease-in-out 1.8s infinite;
+}
+
+.anim-riak {
+  animation: riak 4.5s ease-out infinite both;
+}
+
+.anim-putar {
+  animation: putar 40s linear infinite;
+}
+
+.anim-naik {
+  animation: naik 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.anim-gelombang-a {
+  animation: gelombang 14s linear infinite;
+}
+
+.anim-gelombang-b {
+  animation: gelombang 22s linear infinite reverse;
+}
+
+.anim-kilau {
+  animation: kilau 2.4s ease-out 3.2s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
     transition: none !important;
   }
 }
